@@ -27,6 +27,61 @@
 .App-link {
   color: #61dafb;
 }
+.mapboxgl-ctrl-geocoder{
+  position:relative;
+}
+.mapboxgl-ctrl-geocoder--input{
+  padding-left: 30px;
+  padding-right: 30px;
+  height: 30px;
+}
+.mapboxgl-ctrl-geocoder--icon-search{
+  position: absolute;
+  top: 9px;
+  left: 8px;
+}
+.mapboxgl-ctrl-geocoder--button{
+  position: absolute;
+  background-color: transparent;
+  border-width:0px;
+  top: 7px;
+  left: 160px;
+}
+.mapboxgl-ctrl-geocoder--icon-loading{
+  position: absolute;
+  top: 7px;
+  left: 166px;
+}
+
+.suggestions-wrapper{
+  top: 50px;
+  width: 200px;
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+}
+.suggestions-wrapper li:hover {
+  background-color: #c2c2c2;
+  cursor: pointer;
+}
+.suggestions-wrapper ul {
+  list-style-type: none;
+  padding: 0px;
+  display: flex;
+  flex-flow: column;
+}
+.mapboxgl-ctrl-geocoder--suggestion{
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.mapboxgl-ctrl-geocoder--suggestion-title{
+  font-weight: 800;
+  text-align: left;
+}
+.mapboxgl-ctrl-geocoder--suggestion-address{
+  text-align: left;
+}
+
 
 @keyframes App-logo-spin {
   from {
