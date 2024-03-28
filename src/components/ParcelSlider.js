@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Text, Button, Box, Card, Avatar, TabNav, Container, Inset, Strong } from '@radix-ui/themes';
-
+import ParcelDetails from './ParcelDetails';
 function PropertySlider () {
     return(
         <Box className='property-slider'>
@@ -21,6 +21,7 @@ function PropertySlider () {
               <Text as="p" size="3">
                 <Strong>500 LAND Tokens - 108 Acres</Strong><br/> 744 Bourland Bend, Celina, TX 75009 - Collin County
               </Text>
+              <ParcelDetails/>
             </Card>
             <Card className='property-card' size="2">
               <Inset clip="padding-box" side="top" pb="current">
@@ -39,6 +40,7 @@ function PropertySlider () {
               <Text as="p" size="3">
                 <Strong>500 LAND Tokens - 108 Acres</Strong><br/> 744 Bourland Bend, Celina, TX 75009 - Collin County
               </Text>
+              <ParcelDetails/>
             </Card>
             <Card className='property-card' size="2">
               <Inset clip="padding-box" side="top" pb="current">
@@ -57,6 +59,7 @@ function PropertySlider () {
               <Text as="p" size="3">
                 <Strong>500 LAND Tokens - 108 Acres</Strong><br/> 744 Bourland Bend, Celina, TX 75009 - Collin County
               </Text>
+              <ParcelDetails/>
             </Card>
           </Box>
     )

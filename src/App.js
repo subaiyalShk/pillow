@@ -4,7 +4,7 @@ import Map, {GeolocateControl} from 'react-map-gl';
 import GeocoderControl from './components/GeocoderControl';
 import { Button, Box, Card, TabNav } from '@radix-ui/themes';
 import { useSDK } from "@metamask/sdk-react";
-import PropertySlider from './components/PropertySlider';
+import PropertySlider from './components/ParcelSlider';
 import CreateLandParcel from './components/CreateLandParcel';
 import DrawControl from './components/DrawControls';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
