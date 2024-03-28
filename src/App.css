@@ -129,7 +129,7 @@
   display: flex !important;
   overflow: scroll;
   overflow-x: auto;
-
+  padding-right: 100px;
 }
 .property-card{
   flex: 0 0 auto;
