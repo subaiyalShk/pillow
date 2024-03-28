@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Map, {GeolocateControl} from 'react-map-gl';
 import GeocoderControl from './components/GeocoderControl';
 import { Button, Box, Card, TabNav } from '@radix-ui/themes';
 import { useSDK } from "@metamask/sdk-react";
 import PropertySlider from './components/PropertySlider';
+import CreateLandParcel from './components/CreateLandParcel';
+import DrawControl from './components/DrawControls';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 
 function App() {
   const [account, setAccount] = useState(null);
   const [view, setView] = useState('buy');
-  const { sdk, chainId } = useSDK();
+  const {sdk, chainId} = useSDK();
+  const [features, setFeatures] = useState({});
 
   const connectToWeb3 = async () => {
     try {
@@ -32,6 +36,26 @@ function App() {
     setView(value);
   }
 
+  const onUpdate = useCallback(e => {
+    setFeatures(currFeatures => {
+      const newFeatures = {...currFeatures};
+      for (const f of e.features) {
+        newFeatures[f.id] = f;
+      }
+      return newFeatures;
+    });
+  }, []);
+
+  const onDelete = useCallback(e => {
+    setFeatures(currFeatures => {
+      const newFeatures = {...currFeatures};
+      for (const f of e.features) {
+        delete newFeatures[f.id];
+      }
+      return newFeatures;
+    });
+  }, []);
+
   return (
     <div className="App">
       <div id="top-container">
@@ -42,7 +66,7 @@ function App() {
         }
         <Card className='menu-tabs'>
           <TabNav.Root>
-            <TabNav.Link onClick={(e)=>changeView(e,'account')} href="#" active={view==="account"?true:false}>
+            <TabNav.Link onClick={(e)=>changeView(e,'claim')} href="#" active={view==="claim"?true:false}>
               Claim
             </TabNav.Link>
             <TabNav.Link onClick={(e)=>changeView(e,'buy')} href="#" active={view==="buy"?true:false}>Buy</TabNav.Link>
@@ -65,10 +89,24 @@ function App() {
       >
         <GeolocateControl position='bottom-right'/>
         <GeocoderControl mapboxAccessToken={process.env.REACT_APP_MAPBOX_KEY} position="top-left" />
+        <DrawControl
+          position="top-left"
+          displayControlsDefault={false}
+          controls={{
+            polygon: true,
+            trash: true
+          }}
+          defaultMode="draw_polygon"
+          onCreate={onUpdate}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+        />
       </Map>
       <Box className='data-display-container'>
         <Card className='data-display-card' >
-        <PropertySlider/>
+          {view==="claim"?<CreateLandParcel/>:null}
+          {view==="buy"?<PropertySlider/>:null}
+          {view==="sell"?<PropertySlider/>:null}
         </Card>
       </Box>
     </div>

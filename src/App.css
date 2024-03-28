@@ -1,7 +1,7 @@
 
 .mapboxgl-map{
   position: fixed !important;
-  z-index: 1;
+  z-index: 0;
   top: 0px;
 }
 .App{
@@ -20,18 +20,28 @@
 }
 
 #top-container .menu-tabs{
-  z-index: 2;
+  z-index: 1;
 }
 
 #top-container .login{
   margin: 12px;
-  z-index: 2;
+  z-index: 1;
   
 }
 #top-container .spacer{
-  width:203px;
+  width:130px;
 }
-
+.mapboxgl-ctrl-bottom-right{
+  right: 0;
+  bottom: 320px;
+}
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib{
+  display: none !important;
+}
+.mapboxgl-ctrl-top-left{
+  top: 63px;
+  left: 0;
+}
 .mapboxgl-ctrl-geocoder{
   position:relative;
 }
@@ -40,6 +50,8 @@
   padding-right: 30px;
   height: 30px;
   border-radius:10px;
+  background-color: #c2c2c2;
+  color: black;
 }
 .mapboxgl-ctrl-geocoder--icon-search{
   position: absolute;
@@ -63,7 +75,8 @@
   top: 50px;
   width: 200px;
   position: absolute;
-  background-color: rgb(255, 255, 255);
+  background-color: #c2c2c2;
+  border-radius: 20px;
 }
 .suggestions-wrapper li:hover {
   background-color: #c2c2c2;
@@ -79,6 +92,7 @@
   margin-top: 5px;
   margin-left: 10px;
   margin-right: 10px;
+  color: black;
 }
 .mapboxgl-ctrl-geocoder--suggestion-title{
   font-weight: 800;
@@ -95,7 +109,7 @@
 }
 .data-display-card{
   width: 530px;
-  z-index: 2;
+  z-index: 1;
 }
 .property-slider{
   height: 300px;
@@ -110,6 +124,11 @@
 .property-card{
   flex: 0 0 auto;
   width: 300px;
+}
+
+.claim-land-form{
+  z-index: 1;
+
 }
 
 
