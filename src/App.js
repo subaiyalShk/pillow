@@ -59,23 +59,24 @@ function App() {
   return (
     <div className="App">
       <div id="top-container">
-        {account ?
-          <Button className="login" onClick={disconnectFromWeb3}>{chainId} | {`${account.slice(0,5)}...${account.slice(account.length-5,account.length)}`}</Button>
-            :
-          <Button className="login" onClick={connectToWeb3}>Connect</Button>
-        }
-        <Card className='menu-tabs'>
-          <TabNav.Root>
-            <TabNav.Link onClick={(e)=>changeView(e,'claim')} href="#" active={view==="claim"?true:false}>
-              Claim
-            </TabNav.Link>
-            <TabNav.Link onClick={(e)=>changeView(e,'buy')} href="#" active={view==="buy"?true:false}>Buy</TabNav.Link>
-            <TabNav.Link onClick={(e)=>changeView(e,'sell')} href="#" active={view==="sell"?true:false}>Sell</TabNav.Link>
-          </TabNav.Root>
+        <Card className='menu-items'>
+          <Box>
+            <TabNav.Root>
+              <TabNav.Link onClick={(e)=>changeView(e,'claim')} href="#" active={view==="claim"?true:false}>
+                Claim
+              </TabNav.Link>
+              <TabNav.Link onClick={(e)=>changeView(e,'buy')} href="#" active={view==="buy"?true:false}>Buy</TabNav.Link>
+              <TabNav.Link onClick={(e)=>changeView(e,'sell')} href="#" active={view==="sell"?true:false}>Sell</TabNav.Link>
+            </TabNav.Root>
+          </Box>
+          <Box>
+          {account ?
+            <Button className="login" onClick={disconnectFromWeb3}>{chainId} | {`${account.slice(0,5)}...${account.slice(account.length-5,account.length)}`}</Button>
+              :
+            <Button className="login" onClick={connectToWeb3}>Connect</Button>
+          }
+          </Box>
         </Card>
-        <div className='spacer'>
-
-        </div>
       </div>
       <Map
         mapboxAccessToken={process.env.REACT_APP_MAPBOX_KEY}
@@ -90,7 +91,7 @@ function App() {
         <GeolocateControl position='bottom-right'/>
         <GeocoderControl mapboxAccessToken={process.env.REACT_APP_MAPBOX_KEY} position="top-left" />
         <DrawControl
-          position="top-left"
+          position="top-right"
           displayControlsDefault={false}
           controls={{
             polygon: true,

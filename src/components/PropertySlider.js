@@ -7,7 +7,7 @@ function PropertySlider () {
             <Card className='property-card' size="2">
               <Inset clip="padding-box" side="top" pb="current">
                 <img
-                  src="https://images.unsplash.com/photo-1617050318658-a9a3175e34cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                  src="https://assets.land.com/resizedimages/162/243/h/80/w/1-5039501273"
                   alt="Bold typography"
                   style={{
                     display: 'block',
@@ -19,14 +19,13 @@ function PropertySlider () {
                 />
               </Inset>
               <Text as="p" size="3">
-                <Strong>Typography</Strong> is the art and technique of arranging type to
-                make written language legible, readable and appealing when displayed.
+                <Strong>500 LAND Tokens - 108 Acres</Strong><br/> 744 Bourland Bend, Celina, TX 75009 - Collin County
               </Text>
             </Card>
             <Card className='property-card' size="2">
               <Inset clip="padding-box" side="top" pb="current">
                 <img
-                  src="https://images.unsplash.com/photo-1617050318658-a9a3175e34cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                  src="https://assets.land.com/resizedimages/162/243/h/80/w/1-5082344708"
                   alt="Bold typography"
                   style={{
                     display: 'block',
@@ -38,14 +37,13 @@ function PropertySlider () {
                 />
               </Inset>
               <Text as="p" size="3">
-                <Strong>Typography</Strong> is the art and technique of arranging type to
-                make written language legible, readable and appealing when displayed.
+                <Strong>500 LAND Tokens - 108 Acres</Strong><br/> 744 Bourland Bend, Celina, TX 75009 - Collin County
               </Text>
             </Card>
             <Card className='property-card' size="2">
               <Inset clip="padding-box" side="top" pb="current">
                 <img
-                  src="https://images.unsplash.com/photo-1617050318658-a9a3175e34cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                  src="https://assets.land.com/resizedimages/162/243/h/80/w/1-5161432189"
                   alt="Bold typography"
                   style={{
                     display: 'block',
@@ -57,8 +55,7 @@ function PropertySlider () {
                 />
               </Inset>
               <Text as="p" size="3">
-                <Strong>Typography</Strong> is the art and technique of arranging type to
-                make written language legible, readable and appealing when displayed.
+                <Strong>500 LAND Tokens - 108 Acres</Strong><br/> 744 Bourland Bend, Celina, TX 75009 - Collin County
               </Text>
             </Card>
           </Box>

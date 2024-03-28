@@ -15,25 +15,35 @@
 
 #top-container{
   display: flex;
-  flex-flow: row-reverse;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-#top-container .menu-tabs{
+#top-container .menu-items{
   z-index: 1;
+  width: 520px;
+  height: 65px;
+  display: flex;
+  justify-content: space-around;
 }
 
 #top-container .login{
-  margin: 12px;
+  margin: 3px;
   z-index: 1;
   
 }
-#top-container .spacer{
-  width:130px;
-}
 .mapboxgl-ctrl-bottom-right{
   right: 0;
-  bottom: 320px;
+  bottom: 365px;
+}
+.mapboxgl-ctrl-top-right{
+  top: 63px;
+  border-radius: 15px;
+}
+.mapboxgl-ctrl-group button{
+  background-color: #c2c2c2;
+}
+.mapboxgl-ctrl-group button.active{
+  background-color: #BDEE63;
 }
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib{
   display: none !important;
@@ -112,7 +122,7 @@
   z-index: 1;
 }
 .property-slider{
-  height: 300px;
+  height: 245px;
   width: 600px;
   gap: 20px;
   z-index: 2;
