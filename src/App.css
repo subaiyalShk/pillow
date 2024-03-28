@@ -1,32 +1,37 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.mapboxgl-map{
+  position: fixed !important;
+  z-index: 1;
+  top: 0px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column !important;
+  justify-content: space-between;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
 }
 
-.App-link {
-  color: #61dafb;
+#top-container{
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: space-between;
 }
+
+#top-container .menu-tabs{
+  z-index: 2;
+}
+
+#top-container .login{
+  margin: 12px;
+  z-index: 2;
+  
+}
+#top-container .spacer{
+  width:203px;
+}
+
 .mapboxgl-ctrl-geocoder{
   position:relative;
 }
@@ -34,6 +39,7 @@
   padding-left: 30px;
   padding-right: 30px;
   height: 30px;
+  border-radius:10px;
 }
 .mapboxgl-ctrl-geocoder--icon-search{
   position: absolute;
@@ -80,6 +86,30 @@
 }
 .mapboxgl-ctrl-geocoder--suggestion-address{
   text-align: left;
+}
+.data-display-container{
+ display: flex !important;
+ justify-content: center;
+ align-items: center;
+ width: 100vw;
+}
+.data-display-card{
+  width: 530px;
+  z-index: 2;
+}
+.property-slider{
+  height: 300px;
+  width: 600px;
+  gap: 20px;
+  z-index: 2;
+  display: flex !important;
+  overflow: scroll;
+  overflow-x: auto;
+
+}
+.property-card{
+  flex: 0 0 auto;
+  width: 300px;
 }
 
 
