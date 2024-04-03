@@ -14,6 +14,7 @@ function App() {
   const [view, setView] = useState('buy');
   const {sdk, chainId} = useSDK();
   const [features, setFeatures] = useState({});
+  const [draw, setDraw] = useState(false)
 
   const connectToWeb3 = async () => {
     try {
@@ -37,6 +38,7 @@ function App() {
   }
 
   const onUpdate = useCallback(e => {
+    console.log('',e)
     setFeatures(currFeatures => {
       const newFeatures = {...currFeatures};
       for (const f of e.features) {
@@ -90,22 +92,24 @@ function App() {
       >
         <GeolocateControl position='bottom-right'/>
         <GeocoderControl mapboxAccessToken={process.env.REACT_APP_MAPBOX_KEY} position="top-left" />
-        <DrawControl
-          position="top-right"
-          displayControlsDefault={false}
-          controls={{
-            polygon: true,
-            trash: true
-          }}
-          defaultMode="draw_polygon"
-          onCreate={onUpdate}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-        />
+       {
+          draw?<DrawControl
+            position="top-right"
+            displayControlsDefault={false}
+            controls={{
+              polygon: false,
+              trash: true
+            }}
+            defaultMode="draw_polygon"
+            onCreate={onUpdate}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />:null
+       } 
       </Map>
       <Box className='data-display-container'>
         <Card className='data-display-card' >
-          {view==="claim"?<CreateLandParcel/>:null}
+          {view==="claim"?<CreateLandParcel features={features} draw={draw} setDraw={setDraw}/>:null}
           {view==="buy"?<PropertySlider/>:null}
           {view==="sell"?<PropertySlider/>:null}
         </Card>
