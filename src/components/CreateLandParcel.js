@@ -1,20 +1,46 @@
 import React, {useEffect, useState} from 'react';
 import { Button, Box, Card, TextField, Flex, Heading, DataList, Badge, Code, IconButton, Link } from '@radix-ui/themes';
 import { create } from "ipfs-http-client"
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
-const projectId = process.env.REACT_APP_INFURA_API_KEY;
-const projectSecret = process.env.REACT_APP_INFURA_API_SECRET;
-console.log(projectId, projectSecret)
-const authorization = "Basic " + btoa(projectId + ':' + projectSecret);
+// NOT UPLOADING TO IPFS UNTIL RPC NODE IS SETUP
+// const projectId = process.env.REACT_APP_INFURA_API_KEY;
+// const projectSecret = process.env.REACT_APP_INFURA_API_SECRET;
+// const authorization = "Basic " + btoa(projectId + ':' + projectSecret);
 
-const client = create({
-    host: 'ipfs.infura.io',
-    port: 5001,
-    protocol: 'https',
-    headers: {
-        authorization: authorization,
-    },
-})
+// const client = create({
+//     host: 'ec2-18-221-71-59.us-east-2.compute.amazonaws.com',
+//     port: 5001,
+//     protocol: 'https',
+//     headers: {
+//         authorization: authorization,
+//     },
+// })
+
+const s3Client = new S3Client({
+  region: "us-east-2",
+  credentials: {
+    // provide your credentials here, or leave blank if using a credentials file or IAM role
+    accessKeyId: process.env.REACT_APP_AMAZON_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_AMAZON_ACCESS_KEY_SECRET,
+  },
+});
+
+const uploadJsonToS3 = async (file, bucketName) => {
+    const params = {
+      Bucket: bucketName,
+      Key: file.name, // use the file name as the object key
+      Body: file, // the file content
+    };
+  
+    try {
+      const data = await s3Client.send(new PutObjectCommand(params));
+      console.log("File uploaded successfully:", data);
+    } catch (err) {
+      console.error("Error uploading file:", err);
+      throw err;
+    }
+  };
 
 
 function CreateLandParcel ({draw, setDraw, features}) {
@@ -31,12 +57,14 @@ function CreateLandParcel ({draw, setDraw, features}) {
 
     const mintLandParcel = async () => {
         // first upload metaData to IPFS
-   
         // then mint the land parcel as an NFT
-
         try {
-            const { path } = await client.add(JSON.stringify(metaData));
-            console.log(path);
+            const metaDataFile = new Blob([JSON.stringify(metaData)], {
+                type: 'application/json',
+            });
+            metaDataFile.name = `${metaData.id}.json`; // Set the file name
+            await uploadJsonToS3(metaDataFile, 'pillow-metadata')
+            
           } catch (error) {
             console.error('Error uploading JSON to IPFS:', error);
           }
