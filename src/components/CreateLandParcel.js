@@ -2,11 +2,21 @@ import React, {useEffect, useState} from 'react';
 import { Button, Box, Card, TextField, Flex, Heading, DataList, Badge, Code, IconButton, Link } from '@radix-ui/themes';
 import { create } from "ipfs-http-client"
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import axios from "axios"
+import { mintNFT } from '../controllers/LandNFTs';
+const { ethers } = require('ethers');
+const contractABI = require('../controllers/contractABI.json'); // Replace with the path to your contract's ABI
+const contractAddress = '0x48FC53C14561422b669bA9F52187E3e234CB5eC7';
+
+
+
 
 // NOT UPLOADING TO IPFS UNTIL RPC NODE IS SETUP
 // const projectId = process.env.REACT_APP_INFURA_API_KEY;
 // const projectSecret = process.env.REACT_APP_INFURA_API_SECRET;
 // const authorization = "Basic " + btoa(projectId + ':' + projectSecret);
+
+
 
 // const client = create({
 //     host: 'ec2-18-221-71-59.us-east-2.compute.amazonaws.com',
@@ -17,35 +27,36 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 //     },
 // })
 
-const s3Client = new S3Client({
-  region: "us-east-2",
-  credentials: {
-    // provide your credentials here, or leave blank if using a credentials file or IAM role
-    accessKeyId: process.env.REACT_APP_AMAZON_ACCESS_KEY,
-    secretAccessKey: process.env.REACT_APP_AMAZON_ACCESS_KEY_SECRET,
-  },
-});
+// const s3Client = new S3Client({
+//   region: "us-east-2",
+//   credentials: {
+//     // provide your credentials here, or leave blank if using a credentials file or IAM role
+//     accessKeyId: process.env.REACT_APP_AMAZON_ACCESS_KEY,
+//     secretAccessKey: process.env.REACT_APP_AMAZON_ACCESS_KEY_SECRET,
+//   },
+// });
 
-const uploadJsonToS3 = async (file, bucketName) => {
-    const params = {
-      Bucket: bucketName,
-      Key: file.name, // use the file name as the object key
-      Body: file, // the file content
-    };
+// const uploadJsonToS3 = async (file, bucketName) => {
+//     const params = {
+//       Bucket: bucketName,
+//       Key: file.name, // use the file name as the object key
+//       Body: file, // the file content
+//     };
   
-    try {
-      const data = await s3Client.send(new PutObjectCommand(params));
-      console.log("File uploaded successfully:", data);
-    } catch (err) {
-      console.error("Error uploading file:", err);
-      throw err;
-    }
-  };
+//     try {
+//       const data = await s3Client.send(new PutObjectCommand(params));
+//       console.log("File uploaded successfully:", data);
+//     } catch (err) {
+//       console.error("Error uploading file:", err);
+//       throw err;
+//     }
+//   };
 
 
-function CreateLandParcel ({draw, setDraw, features}) {
+function CreateLandParcel ({draw, setDraw, features, sdk, account}) {
     const [metaData, setMetaData] = useState({})
     const [area, setArea] = useState(0)
+
 
     useEffect(() =>{
         setMetaData(Object.values(features)[0]);
@@ -59,15 +70,22 @@ function CreateLandParcel ({draw, setDraw, features}) {
         // first upload metaData to IPFS
         // then mint the land parcel as an NFT
         try {
-            const metaDataFile = new Blob([JSON.stringify(metaData)], {
-                type: 'application/json',
-            });
-            metaDataFile.name = `${metaData.id}.json`; // Set the file name
-            await uploadJsonToS3(metaDataFile, 'pillow-metadata')
-            
-          } catch (error) {
+            const response = await axios.post('http://ec2-13-58-244-100.us-east-2.compute.amazonaws.com/upload', metaData)
+            console.log(response)
+            const uri = `https://ipfs.io/ipfs/${response.cid}`;
+            const provider = new ethers.providers.Web3Provider(sdk.getProvider());
+            const signer = provider.getSigner();
+            const contract = new ethers.Contract(contractAddress, contractABI, signer);
+            try {
+                const tx = await contract.safeMint(account, tokenId, uri);
+                await tx.wait();
+                console.log('NFT Minted');
+              } catch (error) {
+                console.error('Error minting NFT:', error);
+              }
+        } catch (error) {
             console.error('Error uploading JSON to IPFS:', error);
-          }
+        }
     }
 
     return(

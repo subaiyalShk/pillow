@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Map, {GeolocateControl} from 'react-map-gl';
 import GeocoderControl from './components/GeocoderControl';
-import { Button, Box, Card, TabNav } from '@radix-ui/themes';
+import { Button, Box, Card, TabNav, Spinner } from '@radix-ui/themes';
 import { useSDK } from "@metamask/sdk-react";
 import PropertySlider from './components/ParcelSlider';
 import CreateLandParcel from './components/CreateLandParcel';
 import DrawControl from './components/DrawControls';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
+import * as Progress from '@radix-ui/react-progress';
+import Logo from './PillowLogo.png';
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -15,6 +17,7 @@ function App() {
   const {sdk, chainId} = useSDK();
   const [features, setFeatures] = useState({});
   const [draw, setDraw] = useState(false)
+  const [loading, setLoading] = React.useState(true);
 
   const connectToWeb3 = async () => {
     try {
@@ -58,8 +61,20 @@ function App() {
     });
   }, []);
 
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="App">
+      {loading && 
+      <Card id='splash-screen'>
+        <img src={Logo} />
+      </Card>}
       <div id="top-container">
         <Card className='menu-items'>
           <Box>
@@ -109,7 +124,7 @@ function App() {
       </Map>
       <Box className='data-display-container'>
         <Card className='data-display-card' >
-          {view==="claim"?<CreateLandParcel features={features} draw={draw} setDraw={setDraw}/>:null}
+          {view==="claim"?<CreateLandParcel sdk={sdk} account={account} features={features} draw={draw} setDraw={setDraw}/>:null}
           {view==="buy"?<PropertySlider/>:null}
           {view==="sell"?<PropertySlider/>:null}
         </Card>

@@ -20,7 +20,7 @@
 
 #top-container .menu-items{
   z-index: 1;
-  width: 520px;
+  width: 95%;
   height: 65px;
   display: flex;
   justify-content: space-around;
@@ -118,12 +118,12 @@
  width: 100vw;
 }
 .data-display-card{
-  width: 530px;
+  width: 100%;
   z-index: 1;
 }
 .property-slider{
   height: 280px;
-  width: 600px;
+  width: 100%;
   gap: 20px;
   z-index: 2;
   display: flex !important;
@@ -139,6 +139,17 @@
 .claim-land-form{
   z-index: 1;
 
+}
+
+#splash-screen{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 

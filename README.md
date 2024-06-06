@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+# Pillow - Claim, buy and sell land on the blockchain
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project aims to enable seamless buying and selling of land
+
+![Wireframe 1](./pillow/src/wireframe1.png)
+![Wireframe 2](./pillow/src/wireframe2.png)
+
+## local development
+
+1. compile smart contract - npx hardhat compile
+
+1. Running a local blockchain - npx hardhat node
+    you will see test account like this:
+    Account #0: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 (10000 ETH)
+    Private Key: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+2. import private key to your wallet
 
 ## Available Scripts
 
