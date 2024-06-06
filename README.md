@@ -2,8 +2,8 @@
 
 This project aims to enable seamless buying and selling of land
 
-![Wireframe 1](./pillow/src/wireframe1.png)
-![Wireframe 2](./pillow/src/wireframe2.png)
+![Wireframe 1](./src/wireframe1.png)
+![Wireframe 2](./src/wireframe2.png)
 
 ## local development
 
